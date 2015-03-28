@@ -251,4 +251,21 @@ public class TransaccionJpaController implements Serializable {
         }
     }
     
+    public List<Transaccion> traerClienteNumeroCuenta(Integer idCuenta) throws Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            Query q = em.createQuery("select t from Transaccion t JOIN t.cdcuentaorigen a WHERE a.cdcuentabancaria = :idCuenta");
+            q.setParameter("idCuenta", idCuenta);
+            return q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
 }

@@ -170,5 +170,4 @@ public class RegistroTransaccionJpaController implements Serializable {
             em.close();
         }
     }
-    
 }

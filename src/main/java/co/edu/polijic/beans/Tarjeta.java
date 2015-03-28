@@ -1,37 +1,29 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Politecnico Colombiano Jaime Isaza Cadavid
+ * All Copyright Reserved
+ * 2015
  */
 package co.edu.polijic.beans;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
- * @author felipe
+ * @author Johan Felipe Bedoya
+ * @author Natalia Diaz Padilla
+ * @author Vanessa Agudelo Marin
+ * @version 1.0
  */
 @Entity
 @Table(name = "tarjeta")
-@NamedQueries({
-    @NamedQuery(name = "Tarjeta.findAll", query = "SELECT t FROM Tarjeta t"),
-    @NamedQuery(name = "Tarjeta.findByCdtarjeta", query = "SELECT t FROM Tarjeta t WHERE t.cdtarjeta = :cdtarjeta"),
-    @NamedQuery(name = "Tarjeta.findByNmtarjeta", query = "SELECT t FROM Tarjeta t WHERE t.nmtarjeta = :nmtarjeta"),
-    @NamedQuery(name = "Tarjeta.findByDsmesvencimiento", query = "SELECT t FROM Tarjeta t WHERE t.dsmesvencimiento = :dsmesvencimiento"),
-    @NamedQuery(name = "Tarjeta.findByDsaniovencimiento", query = "SELECT t FROM Tarjeta t WHERE t.dsaniovencimiento = :dsaniovencimiento"),
-    @NamedQuery(name = "Tarjeta.findByCdseguridad", query = "SELECT t FROM Tarjeta t WHERE t.cdseguridad = :cdseguridad")})
 public class Tarjeta implements Serializable {
     @Id
     @Column(name = "cdtarjeta")
@@ -44,19 +36,18 @@ public class Tarjeta implements Serializable {
     private String dsaniovencimiento;
     @Column(name = "cdseguridad")
     private int cdseguridad;
-    //@Column(name="cdcuentabancaria")
-    @JoinColumn(name = "cdcuentabancaria", referencedColumnName = "cdcuentabancaria")
     @ManyToOne
+    @JoinColumn(name = "cdcuentabancaria", referencedColumnName = "cdcuentabancaria")
     private CuentaBancaria cdcuentabancaria;
-    @Column(name="cdestadotarjeta")
+    @Column(name="opestadotarjeta")
     @Enumerated(EnumType.STRING)  
-    private EstadoTarjeta cdestadotarjeta;
-    @Column(name="cdfranquicia")
-    @Enumerated(EnumType.STRING)    
-    private Franquicia cdfranquicia;
-    @Column(name="cdtipotarjeta")
-    @Enumerated(EnumType.STRING)  
-    private TipoTarjeta cdtipotarjeta;
+    private EstadoTarjeta opestadotarjeta;
+    @Column(name="opfranquicia")
+    @Enumerated(EnumType.STRING)
+    private Franquicia opfranquicia;
+    @Column(name="optipotarjeta")
+    @Enumerated(EnumType.STRING)
+    private TipoTarjeta optipotarjeta;
 
     public Tarjeta() {
     }
@@ -69,9 +60,9 @@ public class Tarjeta implements Serializable {
         this.dsaniovencimiento = dsaniovencimiento;
         this.cdseguridad = cdseguridad;
         this.cdcuentabancaria = cdcuentabancaria;
-        this.cdestadotarjeta = cdestadotarjeta;
-        this.cdfranquicia = cdfranquicia;
-        this.cdtipotarjeta = cdtipotarjeta;
+        this.opestadotarjeta = cdestadotarjeta;
+        this.opfranquicia = cdfranquicia;
+        this.optipotarjeta = cdtipotarjeta;
     }
 
     
@@ -125,55 +116,32 @@ public class Tarjeta implements Serializable {
     }
 
     public EstadoTarjeta getCdestadotarjeta() {
-        return cdestadotarjeta;
+        return opestadotarjeta;
     }
 
     public void setCdestadotarjeta(EstadoTarjeta cdestadotarjeta) {
-        this.cdestadotarjeta = cdestadotarjeta;
+        this.opestadotarjeta = cdestadotarjeta;
     }
 
     public Franquicia getCdfranquicia() {
-        return cdfranquicia;
+        return opfranquicia;
     }
 
     public void setCdfranquicia(Franquicia cdfranquicia) {
-        this.cdfranquicia = cdfranquicia;
+        this.opfranquicia = cdfranquicia;
     }
 
     public TipoTarjeta getCdtipotarjeta() {
-        return cdtipotarjeta;
+        return optipotarjeta;
     }
 
     public void setCdtipotarjeta(TipoTarjeta cdtipotarjeta) {
-        this.cdtipotarjeta = cdtipotarjeta;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cdtarjeta != null ? cdtarjeta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tarjeta)) {
-            return false;
-        }
-        Tarjeta other = (Tarjeta) object;
-        if ((this.cdtarjeta == null && other.cdtarjeta != null) || (this.cdtarjeta != null && !this.cdtarjeta.equals(other.cdtarjeta))) {
-            return false;
-        }
-        return true;
+        this.optipotarjeta = cdtipotarjeta;
     }
 
     @Override
     public String toString() {
-        return "Tarjeta{" + "cdtarjeta=" + cdtarjeta + ", nmtarjeta=" + nmtarjeta + ", dsmesvencimiento=" + dsmesvencimiento + ", dsaniovencimiento=" + dsaniovencimiento + ", cdseguridad=" + cdseguridad + ", cdcuentabancaria=" + cdcuentabancaria + ", cdestadotarjeta=" + cdestadotarjeta + ", cdfranquicia=" + cdfranquicia + ", cdtipotarjeta=" + cdtipotarjeta + '}';
+        return "Tarjeta{" + "cdtarjeta=" + cdtarjeta + ", nmtarjeta=" + nmtarjeta + ", dsmesvencimiento=" + dsmesvencimiento + ", dsaniovencimiento=" + dsaniovencimiento + ", cdseguridad=" + cdseguridad + ", cdcuentabancaria=" + cdcuentabancaria + ", cdestadotarjeta=" + opestadotarjeta + ", cdfranquicia=" + opfranquicia + ", cdtipotarjeta=" + optipotarjeta + '}';
     }
 
-    
-    
-    
 }

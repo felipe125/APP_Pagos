@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Politecnico Colombiano Jaime Isaza Cadavid
+ * All Copyright Reserved
+ * 2015
  */
 package co.edu.polijic.beans;
 
@@ -20,14 +20,13 @@ import javax.persistence.Table;
 
 /**
  *
- * @author felipe
+ * @author Johan Felipe Bedoya
+ * @author Natalia Diaz Padilla
+ * @author Vanessa Agudelo Marin
+ * @version 1.0
  */
 @Entity
 @Table(name = "tipo_pago")
-@NamedQueries({
-    @NamedQuery(name = "TipoPago.findAll", query = "SELECT t FROM TipoPago t"),
-    @NamedQuery(name = "TipoPago.findByCdtipopago", query = "SELECT t FROM TipoPago t WHERE t.cdtipopago = :cdtipopago"),
-    @NamedQuery(name = "TipoPago.findByDsdescripcion", query = "SELECT t FROM TipoPago t WHERE t.dsdescripcion = :dsdescripcion")})
 public class TipoPago implements Serializable {
     @Id
     @Column(name = "cdtipopago")
@@ -73,29 +72,11 @@ public class TipoPago implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cdtipopago != null ? cdtipopago.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoPago)) {
-            return false;
-        }
-        TipoPago other = (TipoPago) object;
-        if ((this.cdtipopago == null && other.cdtipopago != null) || (this.cdtipopago != null && !this.cdtipopago.equals(other.cdtipopago))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "TipoPago{" + "cdtipopago=" + cdtipopago + ", dsdescripcion=" + dsdescripcion + ", transacciones=" + transacciones + '}';
     }
+
+    
 
     
     

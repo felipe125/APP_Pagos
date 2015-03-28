@@ -9,7 +9,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-27T19:57:27")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-28T09:40:33")
 @StaticMetamodel(Transaccion.class)
 public class Transaccion_ { 
 
@@ -19,6 +19,6 @@ public class Transaccion_ {
     public static volatile SingularAttribute<Transaccion, TipoPago> cdtipopago;
     public static volatile SingularAttribute<Transaccion, Integer> cdtransaccion;
     public static volatile SingularAttribute<Transaccion, Integer> nmcuotaspago;
-    public static volatile ListAttribute<Transaccion, RegistroTransaccion> registroTransaccionList;
+    public static volatile ListAttribute<Transaccion, RegistroTransaccion> registrosTransacciones;
 
 }

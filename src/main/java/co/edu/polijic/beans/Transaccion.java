@@ -1,18 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Politecnico Colombiano Jaime Isaza Cadavid
+ * All Copyright Reserved
+ * 2015
  */
 package co.edu.polijic.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,16 +20,14 @@ import javax.persistence.Table;
 
 /**
  *
- * @author felipe
+ * @author Johan Felipe Bedoya
+ * @author Natalia Diaz Padilla
+ * @author Vanessa Agudelo Marin
+ * @version 1.0
  */
+
 @Entity
 @Table(name = "transaccion")
-@NamedQueries({
-    @NamedQuery(name = "Transaccion.findAll", query = "SELECT t FROM Transaccion t"),
-    @NamedQuery(name = "Transaccion.findByCdtransaccion", query = "SELECT t FROM Transaccion t WHERE t.cdtransaccion = :cdtransaccion"),
-    @NamedQuery(name = "Transaccion.findByCdcuentadestino", query = "SELECT t FROM Transaccion t WHERE t.cdcuentadestino = :cdcuentadestino"),
-    @NamedQuery(name = "Transaccion.findByVltransaccion", query = "SELECT t FROM Transaccion t WHERE t.vltransaccion = :vltransaccion"),
-    @NamedQuery(name = "Transaccion.findByNmcuotaspago", query = "SELECT t FROM Transaccion t WHERE t.nmcuotaspago = :nmcuotaspago")})
 public class Transaccion implements Serializable {
     @Id
     @Column(name = "cdtransaccion")
@@ -45,9 +40,10 @@ public class Transaccion implements Serializable {
     private int nmcuotaspago;
     @OneToMany(mappedBy = "cdtransaccion")
     private List<RegistroTransaccion> registrosTransacciones;
-    @JoinColumn(name = "cdcuentaorigen", referencedColumnName = "cdcuentabancaria")
     @ManyToOne
+    @JoinColumn(name = "cdcuentaorigen", referencedColumnName = "cdcuentabancaria")
     private CuentaBancaria cdcuentaorigen;
+    @ManyToOne
     @JoinColumn(name = "cdtipopago", referencedColumnName = "cdtipopago")
     private TipoPago cdtipopago;
 
@@ -122,28 +118,10 @@ public class Transaccion implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cdtransaccion != null ? cdtransaccion.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Transaccion)) {
-            return false;
-        }
-        Transaccion other = (Transaccion) object;
-        if ((this.cdtransaccion == null && other.cdtransaccion != null) || (this.cdtransaccion != null && !this.cdtransaccion.equals(other.cdtransaccion))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "co.edu.polijic.beans.Transaccion[ cdtransaccion=" + cdtransaccion + " ]";
+        return "Transaccion{" + "cdtransaccion=" + cdtransaccion + ", cdcuentadestino=" + cdcuentadestino + ", vltransaccion=" + vltransaccion + ", nmcuotaspago=" + nmcuotaspago + ", registrosTransacciones=" + registrosTransacciones + ", cdcuentaorigen=" + cdcuentaorigen + ", cdtipopago=" + cdtipopago + '}';
     }
+
+    
     
 }

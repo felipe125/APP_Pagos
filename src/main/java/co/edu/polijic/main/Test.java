@@ -8,7 +8,8 @@ package co.edu.polijic.main;
 import co.edu.polijic.controllers.RegistroTransaccionJpaController;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import co.edu.polijic.beans.RegistroTransaccion;
+import co.edu.polijic.beans.Transaccion;
+import co.edu.polijic.controllers.TransaccionJpaController;
 /**
  *
  * @author felipe
@@ -19,11 +20,21 @@ public class Test {
         
         try {
              EntityManagerFactory emf = Persistence.createEntityManagerFactory("APP_PagosPU");
-             RegistroTransaccionJpaController registroTransaccionController = new RegistroTransaccionJpaController(emf);
              
+             /*RegistroTransaccionJpaController registroTransaccionController = new RegistroTransaccionJpaController(emf);
              for(RegistroTransaccion registroTransaccion : registroTransaccionController.findRegistroTransaccionEntities()){
                  System.out.println("** : " + registroTransaccion);
-             }
+             }*/
+             
+             /*TarjetaJpaController tarjetaController = new TarjetaJpaController(emf);
+             for(Tarjeta tarjeta : tarjetaController.findTarjetaEntities()){
+                 System.out.println("** : " + tarjeta);
+             }*/
+             
+             TransaccionJpaController transaccionController = new TransaccionJpaController(emf);
+             for (Transaccion transaccion : transaccionController.traerClienteNumeroCuenta(1)) {
+                 System.out.println("Transaccion --> " + transaccion);
+            }
         
         } catch (Exception e) {
             e.printStackTrace();
