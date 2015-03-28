@@ -44,7 +44,7 @@ public class Tarjeta implements Serializable {
     private String dsaniovencimiento;
     @Column(name = "cdseguridad")
     private int cdseguridad;
-    @Column(name="cdcuentabancaria")
+    //@Column(name="cdcuentabancaria")
     @JoinColumn(name = "cdcuentabancaria", referencedColumnName = "cdcuentabancaria")
     @ManyToOne
     private CuentaBancaria cdcuentabancaria;

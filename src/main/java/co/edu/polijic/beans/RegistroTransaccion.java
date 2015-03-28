@@ -46,9 +46,9 @@ public class RegistroTransaccion implements Serializable {
     @Column(name="cdestado")
     @Enumerated(EnumType.STRING)  
     private EstadoTransaccion cdestado;
-    @Column(name="cdtransaccion")
-    @JoinColumn(name = "cdtransaccion", referencedColumnName = "cdtransaccion")
+    //@Column(name="cdtransaccion")
     @ManyToOne
+    @JoinColumn(name = "cdtransaccion", referencedColumnName = "cdtransaccion")
     private Transaccion cdtransaccion;
 
     public RegistroTransaccion() {

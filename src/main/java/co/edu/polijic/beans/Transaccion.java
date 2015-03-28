@@ -34,28 +34,21 @@ import javax.persistence.Table;
     @NamedQuery(name = "Transaccion.findByVltransaccion", query = "SELECT t FROM Transaccion t WHERE t.vltransaccion = :vltransaccion"),
     @NamedQuery(name = "Transaccion.findByNmcuotaspago", query = "SELECT t FROM Transaccion t WHERE t.nmcuotaspago = :nmcuotaspago")})
 public class Transaccion implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "cdtransaccion")
     private Integer cdtransaccion;
-    @Basic(optional = false)
     @Column(name = "cdcuentadestino")
     private int cdcuentadestino;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
     @Column(name = "vltransaccion")
     private BigDecimal vltransaccion;
-    @Basic(optional = false)
     @Column(name = "nmcuotaspago")
     private int nmcuotaspago;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdtransaccion", fetch = FetchType.LAZY)
-    private List<RegistroTransaccion> registroTransaccionList;
+    @OneToMany(mappedBy = "cdtransaccion")
+    private List<RegistroTransaccion> registrosTransacciones;
     @JoinColumn(name = "cdcuentaorigen", referencedColumnName = "cdcuentabancaria")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private CuentaBancaria cdcuentaorigen;
     @JoinColumn(name = "cdtipopago", referencedColumnName = "cdtipopago")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoPago cdtipopago;
 
     public Transaccion() {
@@ -105,11 +98,11 @@ public class Transaccion implements Serializable {
     }
 
     public List<RegistroTransaccion> getRegistroTransaccionList() {
-        return registroTransaccionList;
+        return registrosTransacciones;
     }
 
     public void setRegistroTransaccionList(List<RegistroTransaccion> registroTransaccionList) {
-        this.registroTransaccionList = registroTransaccionList;
+        this.registrosTransacciones = registroTransaccionList;
     }
 
     public CuentaBancaria getCdcuentaorigen() {
