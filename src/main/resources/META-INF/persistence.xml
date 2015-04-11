@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="APP_PagosPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="co.edu.polijic_APP_Pagos_jar_1.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>co.edu.polijic.beans.CuentaBancaria</class>
-    <class>co.edu.polijic.beans.RegistroTransaccion</class>
-    <class>co.edu.polijic.beans.Tarjeta</class>
-    <class>co.edu.polijic.beans.TipoPago</class>
-    <class>co.edu.polijic.beans.Transaccion</class>
+    <class>co.edu.polijic.app_pagos.model.Tarjeta</class>
+    <class>co.edu.polijic.app_pagos.model.Transaccion</class>
+    <class>co.edu.polijic.app_pagos.model.RegistroTransaccion</class>
+    <class>co.edu.polijic.app_pagos.model.TipoPago</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbPagos"/>
       <property name="javax.persistence.jdbc.user" value="prueba"/>
