@@ -29,7 +29,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Transaccion.findAll", query = "SELECT t FROM Transaccion t"),
     @NamedQuery(name = "Transaccion.findByCdtransaccion", query = "SELECT t FROM Transaccion t WHERE t.cdtransaccion = :cdtransaccion"),
-    @NamedQuery(name = "Transaccion.findByCdtarjetaorigen", query = "SELECT t FROM Transaccion t WHERE t.cdtarjetaorigen = :cdtarjetaorigen"),
     @NamedQuery(name = "Transaccion.findByCdtarjetadestino", query = "SELECT t FROM Transaccion t WHERE t.cdtarjetadestino = :cdtarjetadestino"),
     @NamedQuery(name = "Transaccion.findByVltransaccion", query = "SELECT t FROM Transaccion t WHERE t.vltransaccion = :vltransaccion"),
     @NamedQuery(name = "Transaccion.findByNmcuotaspago", query = "SELECT t FROM Transaccion t WHERE t.nmcuotaspago = :nmcuotaspago")})
@@ -39,9 +38,6 @@ public class Transaccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "cdtransaccion")
     private Integer cdtransaccion;
-    @Basic(optional = false)
-    @Column(name = "cdtarjetaorigen")
-    private int cdtarjetaorigen;
     @Basic(optional = false)
     @Column(name = "cdtarjetadestino")
     private int cdtarjetadestino;
@@ -53,12 +49,13 @@ public class Transaccion implements Serializable {
     @Column(name = "nmcuotaspago")
     private int nmcuotaspago;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdtransaccion")
-    private List<RegistroTransaccion> registroTransaccionList;
+    private List<RegistroTransaccion> transacciones;
+    @JoinColumn(name = "cdtarjetaorigen", referencedColumnName = "cdtarjeta")
+    @ManyToOne(optional = false)
+    private Tarjeta cdtarjetaorigen;
     @JoinColumn(name = "cdtipopago", referencedColumnName = "cdtipopago")
     @ManyToOne(optional = false)
     private TipoPago cdtipopago;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdtransaccion")
-    private List<Tarjeta> tarjetaList;
 
     public Transaccion() {
     }
@@ -67,9 +64,8 @@ public class Transaccion implements Serializable {
         this.cdtransaccion = cdtransaccion;
     }
 
-    public Transaccion(Integer cdtransaccion, int cdtarjetaorigen, int cdtarjetadestino, BigDecimal vltransaccion, int nmcuotaspago) {
+    public Transaccion(Integer cdtransaccion, int cdtarjetadestino, BigDecimal vltransaccion, int nmcuotaspago) {
         this.cdtransaccion = cdtransaccion;
-        this.cdtarjetaorigen = cdtarjetaorigen;
         this.cdtarjetadestino = cdtarjetadestino;
         this.vltransaccion = vltransaccion;
         this.nmcuotaspago = nmcuotaspago;
@@ -81,14 +77,6 @@ public class Transaccion implements Serializable {
 
     public void setCdtransaccion(Integer cdtransaccion) {
         this.cdtransaccion = cdtransaccion;
-    }
-
-    public int getCdtarjetaorigen() {
-        return cdtarjetaorigen;
-    }
-
-    public void setCdtarjetaorigen(int cdtarjetaorigen) {
-        this.cdtarjetaorigen = cdtarjetaorigen;
     }
 
     public int getCdtarjetadestino() {
@@ -116,11 +104,19 @@ public class Transaccion implements Serializable {
     }
 
     public List<RegistroTransaccion> getRegistroTransaccionList() {
-        return registroTransaccionList;
+        return transacciones;
     }
 
     public void setRegistroTransaccionList(List<RegistroTransaccion> registroTransaccionList) {
-        this.registroTransaccionList = registroTransaccionList;
+        this.transacciones = registroTransaccionList;
+    }
+
+    public Tarjeta getCdtarjetaorigen() {
+        return cdtarjetaorigen;
+    }
+
+    public void setCdtarjetaorigen(Tarjeta cdtarjetaorigen) {
+        this.cdtarjetaorigen = cdtarjetaorigen;
     }
 
     public TipoPago getCdtipopago() {
@@ -129,14 +125,6 @@ public class Transaccion implements Serializable {
 
     public void setCdtipopago(TipoPago cdtipopago) {
         this.cdtipopago = cdtipopago;
-    }
-
-    public List<Tarjeta> getTarjetaList() {
-        return tarjetaList;
-    }
-
-    public void setTarjetaList(List<Tarjeta> tarjetaList) {
-        this.tarjetaList = tarjetaList;
     }
 
     @Override
