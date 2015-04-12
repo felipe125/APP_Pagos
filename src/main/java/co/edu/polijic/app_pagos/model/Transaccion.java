@@ -64,12 +64,16 @@ public class Transaccion implements Serializable {
         this.cdtransaccion = cdtransaccion;
     }
 
-    public Transaccion(Integer cdtransaccion, int cdtarjetadestino, BigDecimal vltransaccion, int nmcuotaspago) {
+    public Transaccion(Integer cdtransaccion, int cdtarjetadestino, BigDecimal vltransaccion, int nmcuotaspago, Tarjeta cdtarjetaorigen, TipoPago cdtipopago) {
         this.cdtransaccion = cdtransaccion;
         this.cdtarjetadestino = cdtarjetadestino;
         this.vltransaccion = vltransaccion;
         this.nmcuotaspago = nmcuotaspago;
+        this.cdtarjetaorigen = cdtarjetaorigen;
+        this.cdtipopago = cdtipopago;
     }
+
+
 
     public Integer getCdtransaccion() {
         return cdtransaccion;
