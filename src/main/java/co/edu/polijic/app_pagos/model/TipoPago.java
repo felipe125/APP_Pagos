@@ -11,11 +11,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 /**
  *
@@ -23,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tipo_pago")
+@TableGenerator(name="tipoPagoGenerator", initialValue=1, allocationSize=2500)
 @NamedQueries({
     @NamedQuery(name = "TipoPago.findAll", query = "SELECT t FROM TipoPago t"),
     @NamedQuery(name = "TipoPago.findByCdtipopago", query = "SELECT t FROM TipoPago t WHERE t.cdtipopago = :cdtipopago"),
@@ -30,6 +34,7 @@ import javax.persistence.Table;
 public class TipoPago implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="tipoPagoGenerator")
     @Basic(optional = false)
     @Column(name = "cdtipopago")
     private Integer cdtipopago;

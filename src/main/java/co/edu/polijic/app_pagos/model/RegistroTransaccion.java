@@ -10,12 +10,15 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "registro_transaccion")
+@TableGenerator(name="registroTransaccionGenerator", initialValue=1, allocationSize=2500)
 @NamedQueries({
     @NamedQuery(name = "RegistroTransaccion.findAll", query = "SELECT r FROM RegistroTransaccion r"),
     @NamedQuery(name = "RegistroTransaccion.findByCdregistro", query = "SELECT r FROM RegistroTransaccion r WHERE r.cdregistro = :cdregistro"),
@@ -34,6 +38,7 @@ import javax.persistence.TemporalType;
 public class RegistroTransaccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="registroTransaccionGenerator")
     @Basic(optional = false)
     @Column(name = "cdregistro")
     private Integer cdregistro;

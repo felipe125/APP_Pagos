@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.polijic.app_pagos.model;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 /**
  *
@@ -37,33 +34,31 @@ import javax.persistence.Table;
 public class Tarjeta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @TableGenerator(name = "tarjeta_gen", 
+            table = "id_gen", 
+            pkColumnName = "gen_name", 
+            valueColumnName = "gen_val", 
+            allocationSize = 100)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "tarjeta_gen")
     @Column(name = "cdtarjeta")
     private Integer cdtarjeta;
-    @Basic(optional = false)
     @Column(name = "opfranquicia")
     private String opfranquicia;
-    @Basic(optional = false)
     @Column(name = "opestadotarjeta")
     private String opestadotarjeta;
-    @Basic(optional = false)
     @Column(name = "optipotarjeta")
     private String optipotarjeta;
-    @Basic(optional = false)
     @Column(name = "nmtarjeta")
     private int nmtarjeta;
-    @Basic(optional = false)
     @Column(name = "dsmesvencimiento")
     private String dsmesvencimiento;
-    @Basic(optional = false)
     @Column(name = "dsaniovencimiento")
     private String dsaniovencimiento;
-    @Basic(optional = false)
     @Column(name = "cdseguridad")
     private int cdseguridad;
     @Column(name = "dsnombretitular")
     private String dsnombretitular;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdtarjetaorigen")
+    @OneToMany( mappedBy = "cdtarjetaorigen")
     private List<Transaccion> transaccionList;
 
     public Tarjeta() {
